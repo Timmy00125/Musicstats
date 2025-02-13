@@ -7,14 +7,6 @@ router = routers.DefaultRouter()
 router.register(r"user", UserProfileViewSet, basename="user")
 router.register(r"auth", AuthViewSet, basename="auth")
 
-# urlpatterns = [
-#     path("", include(router.urls)),
-#     path(
-#         "auth/spotify/callback/",
-#         AuthViewSet.as_view({"get": "spotify_callback"}),
-#         name="spotify_callback",
-#     ),  # Named URL for callback
-# ]
 
 # spotify_data/urls.py
 urlpatterns = [

@@ -52,9 +52,8 @@ class AuthViewSet(viewsets.ViewSet):
             strategy, backend_name, redirect_uri=reverse("spotify_callback")
         )
         try:
-            user = backend.complete(
-                request, url=reverse("spotify_callback")
-            )  # Complete auth process
+            user = backend.complete(request=request)
+        # Complete auth process
         except AuthException as e:
             return Response(
                 {"error": "Authentication failed", "details": str(e)},
@@ -64,7 +63,7 @@ class AuthViewSet(viewsets.ViewSet):
         if user and user.is_active:
             from django.contrib.auth import login as django_login
 
-            django_login(request, user, backend_name)
+            django_login(request, user)
             # Create or update UserProfile after successful login
             social_user = user.social_auth.get(provider="spotify")
             access_token = social_user.extra_data["access_token"]
@@ -85,7 +84,7 @@ class AuthViewSet(viewsets.ViewSet):
                     "refresh_token": refresh_token,
                 },
             )
-            return redirect(reverse("user-profile"))  # Redirect to user profile view
+            return redirect(reverse("user-list"))  # Redirect to user profile view
         else:
             return Response(
                 {"error": "Login failed"}, status=status.HTTP_400_BAD_REQUEST

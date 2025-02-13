@@ -153,6 +153,9 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",  # Default Django auth
 )
 
+SOCIAL_AUTH_STORAGE = "social_django.models.DjangoStorage"
+SOCIAL_AUTH_STRATEGY = "social_django.strategy.DjangoStrategy"
+
 
 SOCIAL_AUTH_SPOTIFY_KEY = os.environ.get("SOCIAL_AUTH_SPOTIFY_KEY")
 
