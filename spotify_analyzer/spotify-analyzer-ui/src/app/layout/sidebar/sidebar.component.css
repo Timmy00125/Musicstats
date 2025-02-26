@@ -1,0 +1,4 @@
+/* Add any specific styles for sidebar if needed */
+aside {
+  height: 100vh; /* Make sidebar full height */
+}
