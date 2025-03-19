@@ -1,0 +1,31 @@
+<div class="container mx-auto mt-8">
+  <h2>Recently Played Tracks</h2>
+  <p-dataView [value]="recentlyPlayed" [layout]="'grid'" [loading]="loading">
+    <ng-template pTemplate="grid" let-track>
+      <div class="p-col-12 p-md-4">
+        <p-panel
+          [header]="track.track_name"
+          [style]="{ 'text-align': 'center' }"
+        >
+          <img
+            [src]="track.album_image_url"
+            [alt]="track.track_name"
+            class="w-full h-auto"
+            *ngIf="track.album_image_url"
+          />
+          <div
+            *ngIf="!track.album_image_url"
+            class="w-full h-48 bg-gray-300 flex items-center justify-center"
+          >
+            <span class="text-gray-500">No Album Art</span>
+          </div>
+          <p>{{ track.artist_name }}</p>
+          <small>Played at: {{ track.played_at | date : "shortTime" }}</small>
+        </p-panel>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <div>No recently played tracks found.</div>
+    </ng-template>
+  </p-dataView>
+</div>

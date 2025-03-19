@@ -1,27 +1,23 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LayoutComponent } from './layout/layout/layout.component'; // You'll create this next
+import { LoginComponent } from './auth/login/login.component';
+import { SpotifyCallbackComponent } from './auth/spotify-callback/spotify-callback.component';
+import { ListeningHistoryComponent } from './music-data/listening-history/listening-history.component';
+import { RecentlyPlayedComponent } from './music-data/recently-played/recently-played.component';
+import { SavedAlbumsComponent } from './music-data/saved-albums/saved-albums.component';
+import { SavedTracksComponent } from './music-data/saved-tracks/saved-tracks.component';
+import { TopArtistsComponent } from './music-data/top-artists/top-artists.component';
+import { TopTracksComponent } from './music-data/top-tracks/top-tracks.component';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: LayoutComponent, // Use LayoutComponent as shell
-    children: [
-      { path: 'home', component: HomeComponent },
-      {
-        path: 'dashboard',
-        loadChildren: () =>
-          import('./dashboard/dashboard.routes').then(
-            (m) => m.DASHBOARD_ROUTES
-          ), // Lazy load dashboard module
-      },
-      {
-        path: 'auth',
-        loadChildren: () =>
-          import('./auth/auth.routes').then((m) => m.AUTH_ROUTES), // Lazy load auth module
-      },
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-    ],
-  },
-  { path: '**', redirectTo: '' }, // Redirect any unknown routes to home
+  { path: 'login', component: LoginComponent },
+  { path: 'spotify-callback', component: SpotifyCallbackComponent },
+  { path: 'profile', component: UserProfileComponent },
+  { path: 'listening-history', component: ListeningHistoryComponent },
+  { path: 'recently-played', component: RecentlyPlayedComponent },
+  { path: 'saved-albums', component: SavedAlbumsComponent },
+  { path: 'saved-tracks', component: SavedTracksComponent },
+  { path: 'top-artists', component: TopArtistsComponent },
+  { path: 'top-tracks', component: TopTracksComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to login page
 ];

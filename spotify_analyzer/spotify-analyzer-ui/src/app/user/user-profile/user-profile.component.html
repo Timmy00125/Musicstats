@@ -1,0 +1,37 @@
+<div class="flex justify-center mt-8">
+  <p-panel header="User Profile" class="w-full md:w-8">
+    <ng-template pTemplate="content">
+      <div *ngIf="userProfile; else loading">
+        <div class="flex justify-center mb-4">
+          <img
+            *ngIf="userProfile.profile_picture_url"
+            [src]="userProfile.profile_picture_url"
+            alt="Profile Picture"
+            class="rounded-full w-32 h-32"
+          />
+          <div
+            *ngIf="!userProfile.profile_picture_url"
+            class="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center"
+          >
+            <span class="text-gray-500">No Profile Picture</span>
+          </div>
+        </div>
+        <p>
+          <strong>Display Name:</strong> {{ userProfile.display_name || "N/A" }}
+        </p>
+        <p><strong>Spotify ID:</strong> {{ userProfile.spotify_id }}</p>
+      </div>
+      <ng-template #loading>
+        <p>Loading user profile...</p>
+      </ng-template>
+      <div class="mt-4">
+        <button
+          pButton
+          type="button"
+          label="Sync Data"
+          (click)="syncData()"
+        ></button>
+      </div>
+    </ng-template>
+  </p-panel>
+</div>

@@ -31,7 +31,7 @@ SECRET_KEY = "django-insecure-$)@f+hz*sa)r-_@9u%!q7y4ygbmhiy^_)1ue$8p-zkkb)g=(7=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["http://localhost:4200", "localhost"]
 
 
 # Application definition
@@ -44,11 +44,15 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "corsheaders",
+    "django_extensions",
+    "drf_yasg",
     "social_django",
     "spotify_data",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",

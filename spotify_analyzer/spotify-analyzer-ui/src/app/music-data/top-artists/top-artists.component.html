@@ -1,0 +1,30 @@
+<div class="container mx-auto mt-8">
+  <h2>Top Artists</h2>
+  <p-dataView [value]="topArtists" [layout]="'grid'" [loading]="loading">
+    <ng-template pTemplate="grid" let-artist>
+      <div class="p-col-12 p-md-4">
+        <p-panel
+          [header]="artist.artist_name"
+          [style]="{ 'text-align': 'center' }"
+        >
+          <img
+            [src]="artist.artist_image_url"
+            [alt]="artist.artist_name"
+            class="w-full h-auto"
+            *ngIf="artist.artist_image_url"
+          />
+          <div
+            *ngIf="!artist.artist_image_url"
+            class="w-full h-48 bg-gray-300 flex items-center justify-center"
+          >
+            <span class="text-gray-500">No Artist Image</span>
+          </div>
+          <p>{{ artist.genres }}</p>
+        </p-panel>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <div>No top artists found.</div>
+    </ng-template>
+  </p-dataView>
+</div>

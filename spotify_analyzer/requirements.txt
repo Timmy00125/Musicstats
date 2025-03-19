@@ -12,10 +12,15 @@ click-repl==0.3.0
 cryptography==44.0.1
 defusedxml==0.8.0rc2
 Django==5.1.6
+django-cors-headers==4.7.0
+django-extensions==3.2.3
 djangorestframework==3.15.2
+drf-yasg==1.21.10
 idna==3.10
+inflection==0.5.1
 kombu==5.4.2
 oauthlib==3.2.2
+packaging==24.2
 prompt_toolkit==3.0.50
 psycopg2==2.9.10
 pycparser==2.22
@@ -23,6 +28,8 @@ PyJWT==2.10.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 python3-openid==3.2.0
+pytz==2025.1
+PyYAML==6.0.2
 redis==5.2.1
 requests==2.32.3
 requests-oauthlib==2.0.0
@@ -32,6 +39,7 @@ social-auth-app-django==5.4.2
 social-auth-core==4.5.4
 sqlparse==0.5.3
 tzdata==2025.1
+uritemplate==4.1.1
 urllib3==2.3.0
 vine==5.1.0
 wcwidth==0.2.13

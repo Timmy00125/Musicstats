@@ -1,0 +1,38 @@
+<div class="container mx-auto mt-8">
+  <h2>Saved Albums</h2>
+  <p-data-view
+    [value]="savedAlbums"
+    [loading]="loading"
+    [rows]="5"
+    [paginator]="true"
+    [layout]="'grid'"
+  >
+    <ng-template pTemplate="item" let-album>
+      <div class="col-12 sm:col-6 md:col-4 lg:col-3 xl:col-2 p-2">
+        <div class="border-1 surface-border border-round p-4 text-center">
+          <div class="mb-3">
+            <img
+              [src]="album.album_cover_url"
+              [alt]="album.album_title"
+              class="w-full shadow-2"
+              *ngIf="album.album_cover_url"
+            />
+            <div
+              *ngIf="!album.album_cover_url"
+              class="w-full h-48 bg-gray-300 flex items-center justify-center"
+            >
+              <span class="text-gray-500">No Cover Art</span>
+            </div>
+          </div>
+          <div>
+            <h4 class="mb-1">{{ album.album_title }}</h4>
+            <h6 class="mt-0 mb-3 text-gray-700">{{ album.artist_name }}</h6>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <div>No saved albums found.</div>
+    </ng-template>
+  </p-data-view>
+</div>

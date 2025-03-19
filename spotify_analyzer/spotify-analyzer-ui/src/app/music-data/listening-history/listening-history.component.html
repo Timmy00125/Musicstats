@@ -1,0 +1,28 @@
+<div class="container mx-auto mt-8">
+  <p-table
+    [value]="listeningHistory"
+    [loading]="loading"
+    responsiveLayout="scroll"
+  >
+    <ng-template pTemplate="caption"> Listening History </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Track Name</th>
+        <th>Artist Name</th>
+        <th>Played At</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-history>
+      <tr>
+        <td>{{ history.track_name }}</td>
+        <td>{{ history.artist_name }}</td>
+        <td>{{ history.played_at | date : "medium" }}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="3">No listening history found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
