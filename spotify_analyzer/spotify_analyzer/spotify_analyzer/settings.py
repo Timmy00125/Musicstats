@@ -32,7 +32,10 @@ SECRET_KEY = "django-insecure-$)@f+hz*sa)r-_@9u%!q7y4ygbmhiy^_)1ue$8p-zkkb)g=(7=
 DEBUG = True
 
 ALLOWED_HOSTS = ["http://localhost:4200", "localhost"]
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+]
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
     "corsheaders",
     "django_extensions",
     "drf_yasg",
@@ -141,15 +145,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Django REST Framework settings
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
-    ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",  # Optional, if you want token auth
+        "rest_framework.authentication.TokenAuthentication",  # DRF Token Authentication
+        "rest_framework.authentication.SessionAuthentication",  # Optional: Keep session auth for browsable API if needed
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",  # Default permission for API endpoints
     ],
 }
-
 
 # Social Auth Settings (social-auth-app-django)
 AUTHENTICATION_BACKENDS = (

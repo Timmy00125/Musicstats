@@ -12,10 +12,12 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/login/`);
+    return this.http.get(`${this.apiUrl}/login/`, { withCredentials: true });
   }
 
   spotifyCallback(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/spotify/callback/`);
+    return this.http.get(`${this.apiUrl}/spotify/callback/`, {
+      withCredentials: true,
+    });
   }
 }

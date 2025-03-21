@@ -9,7 +9,14 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withFetch,
+} from '@angular/common/http';
+
+import { authInterceptorInterceptor } from './auth-interceptor.interceptor';
+import { csrfInterceptor } from './csrf.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,5 +30,15 @@ export const appConfig: ApplicationConfig = {
         preset: Aura,
       },
     }),
+    {
+      provide: HTTP_INTERCEPTORS, // Register the interceptor
+      useValue: authInterceptorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS, // Register the interceptor
+      useValue: csrfInterceptor,
+      multi: true,
+    },
   ],
 };

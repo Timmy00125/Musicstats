@@ -10,6 +10,11 @@ from social_core.exceptions import AuthException
 import requests
 import json
 
+from rest_framework.authtoken.models import Token  # Import Token model
+from rest_framework.authentication import (
+    SessionAuthentication,
+)  # Import SessionAuthentication if needed
+
 from .models import (
     UserProfile,
     TopArtist,
@@ -84,7 +89,21 @@ class AuthViewSet(viewsets.ViewSet):
                     "refresh_token": refresh_token,
                 },
             )
-            return redirect(reverse("user-list"))  # Redirect to user profile view
+
+            token, created_token = Token.objects.get_or_create(
+                user=user
+            )  # Generate or retrieve token
+
+            return Response(
+                {  # Return JSON response with token and user info
+                    "access_token": token.key,
+                    "token_type": "Token",
+                    "user_id": user.id,
+                    "display_name": user_profile.display_name,
+                    "profile_picture_url": user_profile.profile_picture_url,
+                },
+                status=status.HTTP_200_OK,
+            )
         else:
             return Response(
                 {"error": "Login failed"}, status=status.HTTP_400_BAD_REQUEST
@@ -100,7 +119,7 @@ class AuthViewSet(viewsets.ViewSet):
 class UserProfileViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]  # Keep IsAuthenticated permission
 
     def get_queryset(self):
         return UserProfile.objects.filter(user=self.request.user)

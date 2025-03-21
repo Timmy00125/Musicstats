@@ -1,4 +1,5 @@
 // src/app/services/music.service.ts
+// src/app/services/music.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -12,26 +13,38 @@ export class MusicService {
   constructor(private http: HttpClient) {}
 
   getListeningHistory(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/listening_history/`);
+    return this.http.get<any[]>(`${this.apiUrl}/listening_history/`, {
+      withCredentials: true,
+    });
   }
 
   getRecentlyPlayed(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/recently_played/`);
+    return this.http.get<any[]>(`${this.apiUrl}/recently_played/`, {
+      withCredentials: true,
+    });
   }
 
   getSavedAlbums(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/saved_albums/`);
+    return this.http.get<any[]>(`${this.apiUrl}/saved_albums/`, {
+      withCredentials: true,
+    });
   }
 
   getSavedTracks(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/saved_tracks/`);
+    return this.http.get<any[]>(`${this.apiUrl}/saved_tracks/`, {
+      withCredentials: true,
+    });
   }
 
   getTopArtists(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/top_artists/`);
+    return this.http.get<any[]>(`${this.apiUrl}/top_artists/`, {
+      withCredentials: true,
+    });
   }
 
   getTopTracks(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/top_tracks/`);
+    return this.http.get<any[]>(`${this.apiUrl}/top_tracks/`, {
+      withCredentials: true,
+    });
   }
 }
